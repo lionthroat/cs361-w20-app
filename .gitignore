@@ -1,0 +1,5 @@
+
+*.ini
+*.pyproj
+*.sln
+.vs/cs361-w20-app/v16/.suo
