@@ -77,4 +77,5 @@ input_task_priority.current(0)
 add_new_button = Button(root, text="Add New Task", command=add_task)
 add_new_button.grid(row=11, sticky=W)
 
-root.mainloop()
+if __name__ == "__main__":
+	root.mainloop()
