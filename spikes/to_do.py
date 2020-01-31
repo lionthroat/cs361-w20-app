@@ -42,6 +42,7 @@ def rem_task(i):
 
 	
 def show_tasks():
+	# reset first
 	task_box.delete("1.0", "end")
 	#insert a title into the taskbox
 	task_box.insert(END, 'Task' + '\t' + '\t' + 'Priority' + '\n')
