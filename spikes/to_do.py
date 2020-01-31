@@ -22,19 +22,22 @@ from functools import partial
 def add_task():
 	# get the inputs
 	sample_list.append({'name': input_task_name.get(), 'priority': input_task_priority.get()})
-	task_box.insert(END, input_task_name.get() + '\t' + '\t' + input_task_priority.get() + '\n')
-	task_box.window_create(task_box.index("end"), window = tk.Button(task_box, text="Remove", command = partial(rem_task, sample_list, len(sample_list) - 1)))
+
 	# reset input boxes/selections
 	input_task_name.delete(0, 'end')
 	input_task_priority.current(0)
 
+	# reset display
 	show_tasks()
 
 	print(sample_list)
 
 
 def rem_task(i):
+	# pop the item from the lsit
 	sample_list.pop(i)
+
+	# reset display
 	show_tasks()
 
 	print(sample_list)
@@ -50,6 +53,7 @@ def show_tasks():
 	#insert each task into the taskbox
 	for i in range(len(sample_list)):
 		task_box.insert(END, sample_list[i]['name'] + '\t' + '\t' + sample_list[i]['priority'] + '\n')
+		# attach a button
 		task_box.window_create(task_box.index("end"), window = tk.Button(task_box, text="Remove", command = partial(rem_task, i)))
 		task_box.insert(END, "\n")
 
