@@ -14,12 +14,18 @@
 
 import tkinter as tk
 from tkinter import *
+from tkinter.ttk import *
 
 #function to add a task
 #currently adds a task to the dictionary of tasks and prints. Also adds to the listbox and displays
 def add_task():
-	sample_list[txt_input_task_name.get()] = txt_input_task_priority.get()
-	task_box.insert(END, txt_input_task_name.get() + '\t' + '\t' + txt_input_task_priority.get() + '\n')
+	# get the inputs
+	sample_list[input_task_name.get()] = input_task_priority.get()
+	task_box.insert(END, input_task_name.get() + '\t' + '\t' + input_task_priority.get() + '\n')
+	# reset input boxes/selections
+	input_task_name.delete(0, 'end')
+	input_task_priority.current(0)
+
 	print(sample_list)
 
 def rem_task():
@@ -59,10 +65,13 @@ tk.Label(root, text="New Task Name:", bg="white").grid(row=7, sticky=W)
 tk.Label(root, text="New Task Priority:", bg="white").grid(row=9, sticky=W)
 
 #create text entry fields
-txt_input_task_name = tk.Entry(root)
-txt_input_task_priority = tk.Entry(root)
-txt_input_task_name.grid(row=8, column=0)
-txt_input_task_priority.grid(row=10, column=0)
+input_task_name = tk.Entry(root)
+input_task_name.grid(row = 8, column = 0)
+
+# priority selection field
+input_task_priority = Combobox(root, values = ["", "High", "Low"])
+input_task_priority.grid(row = 10, column = 0)
+input_task_priority.current(0)
 
 #create button to add new task
 add_new_button = Button(root, text="Add New Task", command=add_task)
