@@ -3,19 +3,66 @@
 # Oregon State University, Winter 2020: CS 361, Week 4
 # Agile Project: Release Cycle 1
 #
-# Pair Programming:
-# Heather DiRuscio & Paige Enoch
-# @wrongenvelope and @paigeenoch
-#
-# January 20, 2020
+# February 1, 2020
 ############################################################
-
-# Sample To-Do List Code Source: https://www.youtube.com/watch?v=OAHLwtmdqUk
 
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import *
 from functools import partial
+import json
+
+class ItemsForToDo:
+    def __init__(self, titleOfToDo, priorityStatus):
+        self.__title = titleOfToDo
+        self.__priority = priorityStatus
+    def getTitle(self):
+        return self.__title
+    def getPriority(self):
+        return self.__priority
+    def setTitle(self, titleToSet):
+        self.__title = titleToSet
+    def setPriority(self, priorityToSet):
+        self.__priority = priorityToSet
+
+class ToDoList:
+    def __init__(self):
+        self.__listOfTasks = []
+    def addToList(self, itemToAdd):
+        self.__listOfTasks.append(itemToAdd)
+    def saveToFile(self, fileName):
+        outputFile = open(fileName, 'w')
+        formattedObj = []
+        for item in self.__listOfTasks:
+            newDict = {}
+            newDict['title'] = item.getTitle()
+            newDict['priority'] = item.getPriority()
+            formattedObj.append(newDict)
+        jsonString = json.dumps(formattedObj)
+        outputFile.write(jsonString)
+        outputFile.close()
+    def loadFromFile(self, fileName):
+        inputFile = open(fileName, 'r')
+        line = inputFile.readline()
+        jsonObj = json.loads(line)
+        for item in jsonObj:
+            title = item['title']
+            priority = item['priority']
+            newItem = ItemsForToDo(title, priority)
+            self.addToList(newItem)
+        inputFile.close()
+    def appendToFile(self, itemToAdd, fileName):
+        self.addToList(itemToAdd)
+        self.saveToFile(fileName)
+
+def main():
+    sampleList = ToDoList()
+    sampleList.loadFromFile('testFile.json')
+    thirdSampleItem = ItemsForToDo('feed fish', 'high')
+    sampleList.addToList(thirdSampleItem)
+    sampleList.saveToFile('testFile2.json')
+
+main()
 
 #function to add a task
 #currently adds a task to the dictionary of tasks and prints. Also adds to the listbox and displays
@@ -43,7 +90,7 @@ def rem_task(i):
 	print(sample_list)
 
 
-	
+
 def show_tasks():
 	# reset first
 	task_box.delete("1.0", "end")
