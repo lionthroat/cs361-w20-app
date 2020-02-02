@@ -69,7 +69,7 @@ root.geometry('{}x{}'.format(w, h))
 #generate sample list as a starting point
 sample_list = []
 sample_list.append({'name': "Feed Cat", 'priority': "High"})
-sample_list.append({'name': "Mow Lawn", 'priority': "Low"})
+sample_list.append({'name': "Mow Lawn", 'priority': "Medium"})
 sample_list.append({'name': "Go to DMV", 'priority': "Low"})
 
 #create window label
@@ -89,7 +89,7 @@ input_task_name = tk.Entry(root)
 input_task_name.grid(row = 8, column = 0)
 
 # priority selection field
-input_task_priority = Combobox(root, values = ["", "High", "Low"])
+input_task_priority = Combobox(root, values = ["", "High", "Medium", "Low"])
 input_task_priority.grid(row = 10, column = 0)
 input_task_priority.current(0)
 
