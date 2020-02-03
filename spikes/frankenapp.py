@@ -416,12 +416,24 @@ def add_task():
     # reset display
     show_tasks()
 
-def rem_task(i): # NEEDS TO BE REIMPLEMENTED, SORRY I BROKE IT
-    return
-# 	# pop the item from the lsit
-#     task_list.pop(i)
-# # 	# reset display
-# # 	show_tasks()
+def rem_task():
+	# select current highlighted item and get task and priority
+	i = task_box.focus()
+	task_item = task_box.item(i)["values"][0]
+	task_priority = task_box.item(i)["values"][1]
+	
+	# find index for item to be removed
+	j = 0
+	for i in task_list:
+		if ((i["task"] == task_item) and (i["priority"] == task_priority)):
+			index = j
+		j+=1
+
+	# pop the item from the list
+	task_list.pop(index)
+	print(task_list)
+	# reset display
+	show_tasks()
 
 def show_tasks():
     # empty treeview task_box completely
@@ -461,6 +473,10 @@ task_box.heading('priority', text='Priority',anchor=tk.W)
 
 task_box.grid(columnspan=3)
 show_tasks()
+
+# Button: remove task
+remTask = ttk.Button(showToDo, text='-', command=rem_task, style='newTask.TButton')
+remTask.grid(row=10, column=2)
 ###########################################################
 # BEGIN MAIN APP LOOP: content added BELOW this function won't show up in app
 if __name__ == '__main__':
