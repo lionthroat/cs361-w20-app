@@ -5,7 +5,7 @@
 #       item's title and priority status.
 ##########################################################################
 
-import taskList.py
+import taskList
 ##need to import whatever file is created for viewability here
 
 
