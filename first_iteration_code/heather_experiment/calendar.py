@@ -39,7 +39,7 @@ class AppCalendar(ttk.Label):
     		display['month'] = 1
     	else:
     		display['month'] += 1
-    	drawMonth()
+    	self.drawMonth
     	return
 
     def prevMonth(current, display):

@@ -2,6 +2,7 @@ from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk
 from style import *
+from functools import partial
 
 # TASK LIST
 taskList = []
@@ -24,11 +25,6 @@ class AppToDoList(ttk.Label):
         inputTaskPriority.grid(row = 2, column=1)
         inputTaskPriority.current(0)
 
-        # Button: add new task
-        newTask = ttk.Button(showToDo, text='+', command=self.add_task, style='newTask.TButton')
-        newTask.grid(row=2, column=2)
-
-        print(taskList)
         # Box to display tasks
         taskBox = ttk.Treeview(showToDo)
         taskBox['columns']=('task','priority')
@@ -39,13 +35,17 @@ class AppToDoList(ttk.Label):
         taskBox.heading('priority', text='Priority',anchor=tk.W)
 
         taskBox.grid(columnspan=3)
-        self.show_tasks
+        self.showTasks(taskBox)
+
+        # Button: add new task
+        newTask = ttk.Button(showToDo, text='+', command=partial(self.addTask, inputTask, inputTaskPriority, taskBox), style='newTask.TButton')
+        newTask.grid(row=2, column=2)
 
         # Button: remove task
-        remTask = ttk.Button(showToDo, text='-', command=self.rem_task, style='newTask.TButton')
+        remTask = ttk.Button(showToDo, text='-', command=partial(self.remTask, taskBox), style='newTask.TButton')
         remTask.grid(row=10, column=2)
 
-    def add_task(self):
+    def addTask(self, inputTask, inputTaskPriority, taskBox):
         # get the inputs
         taskList.append({
             'task': inputTask.get(),
@@ -57,18 +57,18 @@ class AppToDoList(ttk.Label):
         inputTaskPriority.current(0)
 
         # reset display
-        self.show_tasks
+        self.showTasks(taskBox)
 
-    def rem_task(self):
+    def remTask(self, taskBox):
     	# select current highlighted item and get task and priority
     	i = taskBox.focus()
-    	task_item = taskBox.item(i)['values'][0]
-    	task_priority = taskBox.item(i)['values'][1]
+    	taskItem = taskBox.item(i)['values'][0]
+    	taskPriority = taskBox.item(i)['values'][1]
 
     	# find index for item to be removed
     	j = 0
     	for i in taskList:
-    		if ((i['task'] == task_item) and (i['priority'] == task_priority)):
+    		if ((i['task'] == taskItem) and (i['priority'] == taskPriority)):
     			index = j
     		j+=1
 
@@ -76,15 +76,14 @@ class AppToDoList(ttk.Label):
     	taskList.pop(index)
     	print(taskList)
     	# reset display
-    	self.show_tasks
+    	self.showTasks(taskBox)
 
-    def show_tasks(self):
+    def showTasks(self, taskBox):
         # empty treeview taskBox completely
         taskBox.delete(*taskBox.get_children())
 
         # reprint all items in taskList to taskBox
         for i in range(len(taskList)):
-            task_item = taskList[i]['task']
-            task_priority = taskList[i]['priority']
-            taskBox.insert('', 'end', values=(task_item, task_priority))
-        return
+            taskItem = taskList[i]['task']
+            taskPriority = taskList[i]['priority']
+            taskBox.insert('', 'end', values=(taskItem, taskPriority))
