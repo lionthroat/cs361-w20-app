@@ -43,8 +43,9 @@ class TaskList:
 	def loadJSON(self, filename):
 		with open(filename) as jsonHandle:
 			jsonData = json.load(jsonHandle)
-			print(jsonData)
-		# placeholder: will add remaining functionality Thursday 2/4
+			for item in jsonData:
+				self.addTaskToList(item['title'], item['priority'])
+		jsonHandle.close()
 ##########################################################################
 #   Function: saveToJSON
 #   Takes: file name to save to
@@ -52,6 +53,27 @@ class TaskList:
 #   Summary: This function takes the current __listOfTasks and converts it
 #       and places into a JSON file.
 ##########################################################################
-	def saveToJSON(self, fileName):
-		# placeholder: will add remaining functionality Thursday 2/4
-		pass
+	def saveToJSON(self, filename):
+		tasks = []
+		for item in self.__listOfTasks:
+			newTask = {}
+			newTask['title'] = item.getTitle()
+			newTask['priority'] = item.getPriority()
+			tasks.append(newTask)
+
+		with open(filename, "w") as jsonHandle:
+			convertedJSON = json.dump(tasks, jsonHandle)
+
+		jsonHandle.close()
+	
+	def printTasks(self):
+		for item in self.__listOfTasks:
+			print(item.getTitle())
+			print(item.getPriority())
+
+newTodo = TaskList()
+newTodo.loadJSON('testfile.json')
+newTodo.printTasks()
+newTodo.addTaskToList("wash clothes", "medium")
+newTodo.printTasks()
+newTodo.saveToJSON('testOutput.json')
