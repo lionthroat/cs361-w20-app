@@ -6,7 +6,7 @@
 ##########################################################################
 
 import json
-import task
+from task import *
 
 class TaskList:
 #########################################################################
@@ -21,14 +21,13 @@ class TaskList:
 		self.__listOfTasks = []
 	def addTaskToList(self, title, priority):
 		##add/remove team to add here
-		self.__listOfTasks.append(Tasks(title, priority))
+		self.__listOfTasks.append(Task(title, priority))
 	def removeTaskFromList(self, title, priority):
 		##add/remove team to add here, no clue what parameters you want
-		j = 0
-		for i in self.__listOfTasks:
-			if ((i.getTitle() == title) and (i.getPriority() == priority)):
-				index = j
-			j+=1        
+		for i in range(len(self.__listOfTasks)):
+			if self.__listOfTasks[i].getTitle() == title and self.__listOfTasks[i].getPriority() == priority:
+				self.__listOfTasks.pop(i)
+				break
 	def getListSize(self):
 		return len(self.__listOfTasks)
 	def getTaskAt(self, index):

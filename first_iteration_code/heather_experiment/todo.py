@@ -3,6 +3,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from style import *
 from functools import partial
+from taskList import *
 
 
 class AppToDoList(ttk.Label):
@@ -20,17 +21,15 @@ class AppToDoList(ttk.Label):
 		inputTaskPriority.grid(row = 2, column=1)
 		inputTaskPriority.current(0)
 
-		# Button: add new task
-		newTask = ttk.Button(showToDo, text='+', command=self.add_task, style='newTask.TButton')
-		newTask.grid(row=2, column=2)
-
 		# TASK LIST
 		mylist = TaskList()
 		mylist.addTaskToList('Feed Cat', 'High')
 		mylist.addTaskToList('Mow Lawn', 'Medium')
 		mylist.addTaskToList('Go to DMV', 'Low')
 		
-		print(taskList)
+		for i in range(mylist.getListSize()):
+			print(f'{mylist.getTaskAt(i).getTitle()}, {mylist.getTaskAt(i).getPriority()}')
+
 		# Box to display tasks
 		taskBox = ttk.Treeview(showToDo)
 		taskBox['columns']=('task','priority')
@@ -41,51 +40,50 @@ class AppToDoList(ttk.Label):
 		taskBox.heading('priority', text='Priority',anchor=tk.W)
 
 		taskBox.grid(columnspan=3)
-		self.show_tasks
+
+		self.showTasks(taskBox, mylist)
+
+		# Button: add new task
+		newTask = ttk.Button(showToDo, text='+', command=partial(self.addTask, inputTask, inputTaskPriority, taskBox, mylist), style='newTask.TButton')
+		newTask.grid(row=2, column=2)
 
 		# Button: remove task
-		remTask = ttk.Button(showToDo, text='-', command=self.rem_task, style='newTask.TButton')
+		remTask = ttk.Button(showToDo, text='-', command=partial(self.remTask, taskBox, mylist), style='newTask.TButton')
 		remTask.grid(row=10, column=2)
 
 #add task
-	def add_task(self):
+	def addTask(self, inputTask, inputTaskPriority, taskBox, mylist):
 		# get the inputs
-		self.mylist.addTaskToList(inputTask.get(), inputTaskPriority.get())
+		mylist.addTaskToList(inputTask.get(), inputTaskPriority.get())
 
 		# reset input boxes/selections
 		inputTask.delete(0, 'end')
 		inputTaskPriority.current(0)
 
 		# reset display
-		self.show_tasks
+		self.showTasks(taskBox, mylist)
 		
 #remove task
-	def rem_task(self):
+	def remTask(self, taskBox, mylist):
 		# select current highlighted item and get task and priority
 		i = taskBox.focus()
-		task_item = taskBox.item(i)['values'][0]
-		task_priority = taskBox.item(i)['values'][1]
+		taskItem = taskBox.item(i)['values'][0]
+		taskPriority = taskBox.item(i)['values'][1]
 		
-		# find index for item to be removed
-		#j = 0
-		#for i in mylist:
-		#	if ((i.getTitle() == task_item) and (i.getPriority() == task_priority)):
-		#		index = j
-		#	j+=1
-
 # pop the item from the list
-		self.mylist.removeTaskFromList(task_item, task_priority)
-		print(self.mylist)
+		mylist.removeTaskFromList(taskItem, taskPriority)
+		for i in range(mylist.getListSize()):
+			print(f'{mylist.getTaskAt(i).getTitle()}, {mylist.getTaskAt(i).getPriority()}')
 		# reset display
-		self.show_tasks()
+		self.showTasks(taskBox, mylist)
 		
-	def show_tasks(self):
+	def showTasks(self, taskBox, mylist):
 		# empty treeview taskBox completely
 		taskBox.delete(*taskBox.get_children())
 
 		# reprint all items in taskList to taskBox
-		for i in range(self.mylist.getListSize()):
-			task_item = self.mylist.getTaskAt(i).getTitle()
-			task_priority = self.mylist.getTaskAt(i).getPrioity()
-			taskBox.insert('', 'end', values=(task_item, task_priority))
+		for i in range(mylist.getListSize()):
+			taskItem = mylist.getTaskAt(i).getTitle()
+			taskPriority = mylist.getTaskAt(i).getPriority()
+			taskBox.insert('', 'end', values=(taskItem, taskPriority))
 		return
