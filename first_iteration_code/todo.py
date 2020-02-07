@@ -1,7 +1,6 @@
 from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk
-#from style import *
 from functools import partial
 from taskList import *
 
@@ -26,7 +25,7 @@ class AppToDoList(ttk.Label):
 		mylist.addTaskToList('Feed Cat', 'High')
 		mylist.addTaskToList('Mow Lawn', 'Medium')
 		mylist.addTaskToList('Go to DMV', 'Low')
-		
+
 		for i in range(mylist.getListSize()):
 			print(f'{mylist.getTaskAt(i).getTitle()}, {mylist.getTaskAt(i).getPriority()}')
 
@@ -62,21 +61,21 @@ class AppToDoList(ttk.Label):
 
 		# reset display
 		self.showTasks(taskBox, mylist)
-		
+
 #remove task
 	def remTask(self, taskBox, mylist):
 		# select current highlighted item and get task and priority
 		i = taskBox.focus()
 		taskItem = taskBox.item(i)['values'][0]
 		taskPriority = taskBox.item(i)['values'][1]
-		
+
 # pop the item from the list
 		mylist.removeTaskFromList(taskItem, taskPriority)
 		for i in range(mylist.getListSize()):
 			print(f'{mylist.getTaskAt(i).getTitle()}, {mylist.getTaskAt(i).getPriority()}')
 		# reset display
 		self.showTasks(taskBox, mylist)
-		
+
 	def showTasks(self, taskBox, mylist):
 		# empty treeview taskBox completely
 		taskBox.delete(*taskBox.get_children())

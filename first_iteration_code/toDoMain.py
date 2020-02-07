@@ -8,35 +8,37 @@
 import tkinter.ttk as ttk
 import taskList
 from todo import *
-##need to import whatever file is created for viewability here
+from style import *
+import sys
+import time
+import json
 
+from menu import AppMenuBar
+from calendar import AppCalendar
+from notebook import AppTabs
 
-def main():
-    ####add here for whatever should be called from all the other files
+class ToDoApp(tk.Tk):
+	def __init__(self):
+		tk.Tk.__init__(self) # root tk instance
+		#### add here for whatever should be called from all the other files ####
 
-	######################################################
-	# tk instantiation
-	# since Tk() is meant to be called once per program,
-	# all elements need to belong to or be indirectly linked
-	# to root to show up in the program
-	root = tk.Tk()
+		# the cosmetic stuff
+		self.title('CS 361 Final Project')
 
-	# Window title: think .wm_title('<title>') does same thing?
-	root.title('~ CS 361 Final Project ~') # anyone have a good name yet??
+		# Set window geometry
+		w = '810'
+		h = '710'
+		self.geometry('{}x{}'.format(w, h))
+		self.config(background='#282a36')
+		theme = AppStyle(self)
 
-	# Set window geometry
-	w = '800'
-	h = '710'
-	root.geometry('{}x{}'.format(w, h))
+		# the menu bar
+		menubar = AppMenuBar(self)   # create menu bar instance
+		self.config(menu=menubar) # add menu bar to app
 
-	# App background color
-	root.configure(background='#282a36')
-	######################################################
+		# the notebook tabs
+		tabs = AppTabs(self)
 
-	#showToDo = ttk.LabelFrame(todo_widget, style='taskBlock.TLabelframe', width=670)
-	showToDo = AppToDoList(root)
-	showToDo.grid(row=1)
-
-	root.mainloop()
-
-main()
+if __name__ == "__main__":
+    app=ToDoApp()      # our App class instantiates the GUI interface and functionality
+    app.mainloop() # we've seen this as root.mainloop() before

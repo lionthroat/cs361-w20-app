@@ -2,16 +2,21 @@ from tkinter.ttk import *
 from tkinter import *
 import tkinter as tk
 import tkinter.ttk as ttk
-import sys
 import time
 import json
+
+import sys
+sys.path.insert(0, 'themes/style.py')
+import style
 
 # our classes
 from menu import AppMenuBar
 from notebook import AppTabs
 from calendar import AppCalendar
 from todo import *
-from style import * # (Need all because of color palette)
+#from style import * # (Need all because of color palette)
+
+import file
 
 class App(tk.Tk):
     def __init__(self):
