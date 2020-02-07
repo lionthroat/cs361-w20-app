@@ -1,11 +1,11 @@
 ##########################################################################
-#   Class: Tasks
+#   Class: Task
 #   Summary:  This class holds the data for each task, including title of
 #       the task and priority status for the task.  It also holds
 #       functions to get or set all data.
 ##########################################################################
 
-class Tasks:
+class Task:
 #########################################################################
 #   Variables used in this class:
 #       __title: holds the title to display for the task
@@ -28,3 +28,4 @@ class Tasks:
         self.__title = title
     def setPriority(self, priority):
         self.__priority = priority
+
