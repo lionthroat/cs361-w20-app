@@ -22,12 +22,8 @@ class AppToDoList(ttk.Label):
 
 		# TASK LIST
 		mylist = TaskList()
-		mylist.addTaskToList('Feed Cat', 'High')
-		mylist.addTaskToList('Mow Lawn', 'Medium')
-		mylist.addTaskToList('Go to DMV', 'Low')
-
-		for i in range(mylist.getListSize()):
-			print(f'{mylist.getTaskAt(i).getTitle()}, {mylist.getTaskAt(i).getPriority()}')
+		mylist.loadJSON('taskFile.json')
+		# mylist.printTasks()
 
 		# Box to display tasks
 		taskBox = ttk.Treeview(showToDo)
@@ -54,7 +50,8 @@ class AppToDoList(ttk.Label):
 	def addTask(self, inputTask, inputTaskPriority, taskBox, mylist):
 		# get the inputs
 		mylist.addTaskToList(inputTask.get(), inputTaskPriority.get())
-
+		# mylist.printTasks()
+		mylist.saveToJSON('taskFile.json')
 		# reset input boxes/selections
 		inputTask.delete(0, 'end')
 		inputTaskPriority.current(0)
@@ -71,8 +68,9 @@ class AppToDoList(ttk.Label):
 
 # pop the item from the list
 		mylist.removeTaskFromList(taskItem, taskPriority)
-		for i in range(mylist.getListSize()):
-			print(f'{mylist.getTaskAt(i).getTitle()}, {mylist.getTaskAt(i).getPriority()}')
+		# mylist.printTasks()
+		mylist.saveToJSON('taskFile.json')
+
 		# reset display
 		self.showTasks(taskBox, mylist)
 

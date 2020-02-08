@@ -70,10 +70,3 @@ class TaskList:
 		for item in self.__listOfTasks:
 			print(item.getTitle())
 			print(item.getPriority())
-
-newTodo = TaskList()
-newTodo.loadJSON('testfile.json')
-newTodo.printTasks()
-newTodo.addTaskToList("wash clothes", "medium")
-newTodo.printTasks()
-newTodo.saveToJSON('testOutput.json')
