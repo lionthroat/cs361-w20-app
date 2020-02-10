@@ -21,8 +21,9 @@ class AppToDoList(ttk.Label):
 		inputTaskPriority.current(0)
 
 		# TASK LIST
+		self.filepath = 'taskFile.json'
 		mylist = TaskList()
-		mylist.loadJSON('taskFile.json')
+		mylist.loadJSON(self.filepath)
 		# mylist.printTasks()
 
 		# Box to display tasks
@@ -51,7 +52,7 @@ class AppToDoList(ttk.Label):
 		# get the inputs
 		mylist.addTaskToList(inputTask.get(), inputTaskPriority.get())
 		# mylist.printTasks()
-		mylist.saveToJSON('taskFile.json')
+		mylist.saveToJSON(self.filepath)
 		# reset input boxes/selections
 		inputTask.delete(0, 'end')
 		inputTaskPriority.current(0)
@@ -69,7 +70,7 @@ class AppToDoList(ttk.Label):
 # pop the item from the list
 		mylist.removeTaskFromList(taskItem, taskPriority)
 		# mylist.printTasks()
-		mylist.saveToJSON('taskFile.json')
+		mylist.saveToJSON(self.filepath)
 
 		# reset display
 		self.showTasks(taskBox, mylist)
