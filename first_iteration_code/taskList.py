@@ -19,19 +19,30 @@ class TaskList:
 ##########################################################################
 	def __init__(self):
 		self.__listOfTasks = []
+
+##########################################################################
+#   Function: addTaskToList
+#   Takes: title and priority of the new task
+#   Returns: nothing
+#   Summary: This function takes the title and priority of the new task
+#		to be added, and appends it to the task list.
+##########################################################################
 	def addTaskToList(self, title, priority):
-		##add/remove team to add here
 		self.__listOfTasks.append(Task(title, priority))
+
+##########################################################################
+#   Function: removeTaskFromList
+#   Takes: title and priority of the task to be removed
+#   Returns: nothing
+#   Summary: This function takes the title and priority of the task to be
+#		deleted, and pops it from the task list.
+##########################################################################
 	def removeTaskFromList(self, title, priority):
-		##add/remove team to add here, no clue what parameters you want
 		for i in range(len(self.__listOfTasks)):
 			if self.__listOfTasks[i].getTitle() == title and self.__listOfTasks[i].getPriority() == priority:
 				self.__listOfTasks.pop(i)
 				break
-	def getListSize(self):
-		return len(self.__listOfTasks)
-	def getTaskAt(self, index):
-		return self.__listOfTasks[index]
+
 ##########################################################################
 #   Function: loadJSON
 #   Takes: file name to load from
@@ -46,6 +57,7 @@ class TaskList:
 			for item in jsonData:
 				self.addTaskToList(item['title'], item['priority'])
 		jsonHandle.close()
+
 ##########################################################################
 #   Function: saveToJSON
 #   Takes: file name to save to
@@ -65,8 +77,23 @@ class TaskList:
 			convertedJSON = json.dump(tasks, jsonHandle)
 
 		jsonHandle.close()
-	
+
+##########################################################################
+#   Function: printTasks
+#   Takes: nothing
+#   Returns: nothing
+#   Summary: This function prints to console the title and priority of
+#		every item in the task list.
+##########################################################################
 	def printTasks(self):
 		for item in self.__listOfTasks:
 			print(item.getTitle())
 			print(item.getPriority())
+
+##########################################################################
+#   GETTERS AND SETTERS
+##########################################################################
+	def getListSize(self):
+		return len(self.__listOfTasks)
+	def getTaskAt(self, index):
+		return self.__listOfTasks[index]
