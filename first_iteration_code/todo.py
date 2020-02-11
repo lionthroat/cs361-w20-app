@@ -1,8 +1,8 @@
 from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk
-from functools import partial
-from taskList import *
+from functools import partial	# passing function arguments where syntactically not allowed
+from TaskList import *
 
 
 class AppToDoList(ttk.Label):
@@ -47,34 +47,33 @@ class AppToDoList(ttk.Label):
 		remTask = ttk.Button(showToDo, text='-', command=partial(self.remTask, taskBox, mylist), style='newTask.TButton')
 		remTask.grid(row=10, column=2)
 
-#add task
+# add task
 	def addTask(self, inputTask, inputTaskPriority, taskBox, mylist):
-		# get the inputs
+		# get the inputs and add to the task list object
 		mylist.addTaskToList(inputTask.get(), inputTaskPriority.get())
-		# mylist.printTasks()
-		mylist.saveToJSON(self.filepath)
-		# reset input boxes/selections
+		# clear the input boxes/selections
 		inputTask.delete(0, 'end')
 		inputTaskPriority.current(0)
 
-		# reset display
+		# save changes to file and reset display
+		mylist.saveToJSON(self.filepath)
 		self.showTasks(taskBox, mylist)
 
-#remove task
+# remove task
 	def remTask(self, taskBox, mylist):
 		# select current highlighted item and get task and priority
 		i = taskBox.focus()
 		taskItem = taskBox.item(i)['values'][0]
 		taskPriority = taskBox.item(i)['values'][1]
 
-# pop the item from the list
+		# pop the item from the list
 		mylist.removeTaskFromList(taskItem, taskPriority)
-		# mylist.printTasks()
-		mylist.saveToJSON(self.filepath)
 
-		# reset display
+		# save changes to file and reset display
+		mylist.saveToJSON(self.filepath)
 		self.showTasks(taskBox, mylist)
 
+# show tasks: add all items from task list to the display object
 	def showTasks(self, taskBox, mylist):
 		# empty treeview taskBox completely
 		taskBox.delete(*taskBox.get_children())
