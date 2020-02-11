@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 
 class AppMenuBar(tk.Menu):
     def __init__(self, parent):
