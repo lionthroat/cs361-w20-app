@@ -37,7 +37,8 @@ class AppCalendar(ttk.Label):
 	def addAppt(self, display, date, mylist):
 		# change the data structure
 		inputAppt = askstring('Add Appointment', 'Enter the name of the appointment.')
-		mylist.append({'appt': inputAppt, 'year': display['year'], 'month': display['month'], 'date': date})
+		if inputAppt:
+			mylist.append({'appt': inputAppt, 'year': display['year'], 'month': display['month'], 'date': date})
 		print(mylist)
 
 	def currMonth(self, current, display, mylist):
@@ -105,9 +106,17 @@ class AppCalendar(ttk.Label):
 						dayBlock[daysShown].configure(text='%s'%(daysShown + 1), borderwidth=0, width=105, height=100)
 						dayBlock[daysShown].grid(row=wk+3,column=day)
 
+						# display the appointments
+						curRow = 3
+						for item in mylist:
+							if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == daysSown + 1:
+								appts = ttk.Label(dayBlock[daysShown], text=item['appt'])
+								appts.grid(row=curRow, column=2)
+								curRow + 1
+
 						# when button is added, the calendar dimensions gett messed up
 						newAppt = ttk.Button(dayBlock[daysShown], text='+', command=partial(self.addAppt, display, daysShown + 1, mylist))
-						newAppt.grid()
+						newAppt.grid(row=curRow+2, column=2)
 
 						#ttk.Label(showMonth, text='%s'%(daysShown + 1), borderwidth=1, padx=5, pady=5, width=10, height=5, foreground='#CFD0C2', background='red', takefocus=1).grid(row=wk+2,column=day)
 						daysShown = daysShown + 1
