@@ -10,9 +10,9 @@ class AppTabs(ttk.Notebook):
 
         todo_widget = AppToDoList(self)
         todo_widget.grid()
-        # cal_widget = AppCalendar(self)
-        # cal_widget.grid()
+        cal_widget = AppCalendar(self)
+        cal_widget.grid()
 
         self.add(todo_widget, text='To-Do List') # sticky to position content inside tab
-        # self.add(cal_widget, text='Calendar')
+        self.add(cal_widget, text='Calendar')
         self.grid()
