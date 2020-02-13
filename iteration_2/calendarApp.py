@@ -21,7 +21,7 @@ class AppCalendar(ttk.Label):
 		#self.filepath = 'apptFile.json'
 		#mylist = ApptList()
 		#mylist.loadJSON(self.filepath)
-		mylist = []
+		mylist = [{'appt': 'test input', 'year': 2020, 'month': 2, 'date': 13}]
 		
 		# Calendar Navigation Buttons
 		calNav = ttk.LabelFrame(self, labelanchor='n', style='calNav.TLabelframe')
@@ -35,11 +35,14 @@ class AppCalendar(ttk.Label):
 
 # add apointment
 	def addAppt(self, display, date, mylist):
-		# change the data structure
+		# ask for the appointment name with a pop-up
 		inputAppt = askstring('Add Appointment', 'Enter the name of the appointment.')
 		if inputAppt:
+			# the data structure should be changed from a dictionary to a class
 			mylist.append({'appt': inputAppt, 'year': display['year'], 'month': display['month'], 'date': date})
 		print(mylist)
+
+		self.drawMonth(display, mylist)
 
 	def currMonth(self, current, display, mylist):
 		display['year'] = current['year']
@@ -102,21 +105,26 @@ class AppCalendar(ttk.Label):
 					# If number of days printed to grid so far is less than the days in
 					# a given month, add another day
 					if daysShown < numDays:
-						dayBlock.append(ttk.LabelFrame(showMonth, text=daysShown, style='dayBlock.TLabelframe'))
-						dayBlock[daysShown].configure(text='%s'%(daysShown + 1), borderwidth=0, width=105, height=100)
+						#dayBlock.append(ttk.LabelFrame(showMonth, text=daysShown, style='dayBlock.TLabelframe'))
+						dayBlock.append(ttk.LabelFrame(showMonth, style='dayBlock.TLabelframe'))
+						dayBlock[daysShown].configure(borderwidth=0, width=105, height=100)
 						dayBlock[daysShown].grid(row=wk+3,column=day)
 
-						# display the appointments
-						curRow = 3
-						for item in mylist:
-							if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == daysSown + 1:
-								appts = ttk.Label(dayBlock[daysShown], text=item['appt'])
-								appts.grid(row=curRow, column=2)
-								curRow + 1
+						# display the current date
+						curDate = ttk.Label(dayBlock[daysShown], text=daysShown + 1)
+						curDate.grid(row = 0)
 
-						# when button is added, the calendar dimensions gett messed up
+						# display the appointments
+						curRow = 1
+						for item in mylist:
+							if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == daysShown + 1:
+								appts = ttk.Label(dayBlock[daysShown], text=item['appt'], borderwidth = 0)
+								appts.grid(row = curRow + 1)
+								curRow += 1
+
+						# button to add appointment
 						newAppt = ttk.Button(dayBlock[daysShown], text='+', command=partial(self.addAppt, display, daysShown + 1, mylist))
-						newAppt.grid(row=curRow+2, column=2)
+						newAppt.grid(row=curRow+2)
 
 						#ttk.Label(showMonth, text='%s'%(daysShown + 1), borderwidth=1, padx=5, pady=5, width=10, height=5, foreground='#CFD0C2', background='red', takefocus=1).grid(row=wk+2,column=day)
 						daysShown = daysShown + 1
