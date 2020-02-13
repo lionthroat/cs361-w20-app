@@ -6,7 +6,7 @@
 ##########################################################################
 
 import tkinter.ttk as ttk
-import taskList
+import TaskList
 from todo import *
 from style import *
 import sys
@@ -17,7 +17,7 @@ from menu import AppMenuBar
 from calendar import AppCalendar
 from notebook import AppTabs
 
-class ToDoApp(tk.Tk):
+class mainApp(tk.Tk):
 	def __init__(self):
 		tk.Tk.__init__(self) # root tk instance
 		#### add here for whatever should be called from all the other files ####
@@ -40,5 +40,5 @@ class ToDoApp(tk.Tk):
 		tabs = AppTabs(self)
 
 if __name__ == "__main__":
-    app=ToDoApp()      # our App class instantiates the GUI interface and functionality
+    app=mainApp()      # our App class instantiates the GUI interface and functionality
     app.mainloop() # we've seen this as root.mainloop() before

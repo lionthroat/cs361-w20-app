@@ -24,12 +24,12 @@ class AppCalendar(ttk.Label):
         currMonthBtn = ttk.Button(calNav, text=' Current ', command=partial(self.currMonth, current, display)).grid(row=2,column=2, sticky='n')
         nxtMonthBtn = ttk.Button(calNav, text=' Next => ', command=partial(self.nextMonth, current, display)).grid(row=2,column=3, sticky='e',)
 
-        self.drawMonth
+        self.drawMonth()
 
     def currMonth(self, current, display):
     	display['year'] = current['year']
     	display['month'] = current['month']
-    	self.drawMonth
+    	self.drawMonth()
     	return
 
     def nextMonth(self, current, display):
@@ -38,7 +38,7 @@ class AppCalendar(ttk.Label):
     		display['month'] = 1
     	else:
     		display['month'] += 1
-    	self.drawMonth
+    	self.drawMonth()
     	return
 
     def prevMonth(current, display):
@@ -47,7 +47,7 @@ class AppCalendar(ttk.Label):
     		display['month'] = 12
     	else:
     		display['month'] -= 1
-    	self.drawMonth
+    	self.drawMonth()
     	return
 
     def drawMonth(self):
