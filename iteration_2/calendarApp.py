@@ -1,9 +1,9 @@
-from tkinter.ttk import *
 import tkinter.ttk as ttk
 from functools import partial
 from datetime import datetime
 import calendar as cal
-from tkinter.simpledialog import askstring
+from tkinter import simpledialog
+from tkinter import messagebox
 
 class AppCalendar(ttk.Label):
 	def __init__(self, parent):
@@ -33,16 +33,25 @@ class AppCalendar(ttk.Label):
 
 		self.drawMonth(display, mylist)
 
-# add apointment
+# add appointment
 	def addAppt(self, display, date, mylist):
 		# ask for the appointment name with a pop-up
-		inputAppt = askstring('Add Appointment', 'Enter the name of the appointment.')
+		inputAppt = simpledialog.askstring('Add Appointment', 'Enter the name of the appointment.')
 		if inputAppt:
 			# the data structure should be changed from a dictionary to a class
 			mylist.append({'appt': inputAppt, 'year': display['year'], 'month': display['month'], 'date': date})
 		print(mylist)
 
 		self.drawMonth(display, mylist)
+
+# display appointments for each day
+	def displayAppt(self, display, today, mylist):
+		toShow = ''
+		for item in mylist:
+			if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == today:
+				toShow = toShow + (item['appt']) + '\n'
+
+		messagebox.showinfo(f'{display["month"]}/{today}/{display["year"]}', toShow)
 
 	def currMonth(self, current, display, mylist):
 		display['year'] = current['year']
@@ -106,25 +115,20 @@ class AppCalendar(ttk.Label):
 					# a given month, add another day
 					if daysShown < numDays:
 						#dayBlock.append(ttk.LabelFrame(showMonth, text=daysShown, style='dayBlock.TLabelframe'))
-						dayBlock.append(ttk.LabelFrame(showMonth, style='dayBlock.TLabelframe'))
+						dayBlock.append(ttk.LabelFrame(showMonth, text=daysShown + 1, style='dayBlock.TLabelframe'))
 						dayBlock[daysShown].configure(borderwidth=0, width=105, height=100)
 						dayBlock[daysShown].grid(row=wk+3,column=day)
+						dayBlock[daysShown].grid_propagate(False)
 
-						# display the current date
-						curDate = ttk.Label(dayBlock[daysShown], text=daysShown + 1)
-						curDate.grid(row = 0)
-
-						# display the appointments
-						curRow = 1
+						# button to show appointments
 						for item in mylist:
 							if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == daysShown + 1:
-								appts = ttk.Label(dayBlock[daysShown], text=item['appt'], borderwidth = 0)
-								appts.grid(row = curRow + 1)
-								curRow += 1
+								showButton = ttk.Button(dayBlock[daysShown], text='Show Appt', command=partial(self.displayAppt, display, daysShown + 1, mylist))
+								showButton.grid(row = 1)
 
 						# button to add appointment
-						newAppt = ttk.Button(dayBlock[daysShown], text='+', command=partial(self.addAppt, display, daysShown + 1, mylist))
-						newAppt.grid(row=curRow+2)
+						newButton = ttk.Button(dayBlock[daysShown], text='+', command=partial(self.addAppt, display, daysShown + 1, mylist))
+						newButton.grid(row = 2, sticky='w')
 
 						#ttk.Label(showMonth, text='%s'%(daysShown + 1), borderwidth=1, padx=5, pady=5, width=10, height=5, foreground='#CFD0C2', background='red', takefocus=1).grid(row=wk+2,column=day)
 						daysShown = daysShown + 1
