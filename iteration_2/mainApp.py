@@ -40,5 +40,5 @@ class mainApp(tk.Tk):
 		tabs = AppTabs(self)
 
 if __name__ == "__main__":
-    app=mainApp()      # our App class instantiates the GUI interface and functionality
-    app.mainloop() # we've seen this as root.mainloop() before
+	app=mainApp()      # our App class instantiates the GUI interface and functionality
+	app.mainloop() # we've seen this as root.mainloop() before
