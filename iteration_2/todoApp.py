@@ -2,7 +2,7 @@ from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk
 from functools import partial	# passing function arguments where syntactically not allowed
-from TaskList import *
+from TaskListClass import *
 
 
 class AppToDoList(ttk.Label):

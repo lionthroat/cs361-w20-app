@@ -6,15 +6,15 @@
 ##########################################################################
 
 import tkinter.ttk as ttk
-import TaskList
-from todo import *
+import TaskListClass
+from todoApp import *
 from style import *
 import sys
 import time
 import json
 
 from menu import AppMenuBar
-from calendar import AppCalendar
+from calendarApp import AppCalendar
 from notebook import AppTabs
 
 class mainApp(tk.Tk):

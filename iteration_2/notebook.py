@@ -1,7 +1,7 @@
 from tkinter.ttk import *
 import tkinter.ttk as ttk
-from todo import AppToDoList
-from calendar import AppCalendar
+from todoApp import AppToDoList
+from calendarApp import AppCalendar
 
 class AppTabs(ttk.Notebook):
     def __init__(self, parent):
