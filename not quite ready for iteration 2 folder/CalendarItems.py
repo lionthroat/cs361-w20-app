@@ -23,22 +23,22 @@ class CalendarItems:
 
 ##########################################################################
 #   Function: addApptToList
-#   Takes: title, date, start time, end time and comments of a new appt
+#   Takes: title, date day, month and year, start time, end time and comments of a new appt
 #   Returns: nothing
 #   Summary: This function takes the information of a new appointment
 #		to be added, and appends it to the list of calendar items.
 ##########################################################################
-	def addApptToList(self, title, date, startTime, endTime, comments):
+	def addApptToList(self, title, day, month, year, startTime, endTime, comments):
 	
 
 ##########################################################################
 #   Function: removeApptFromList
-#   Takes: title, date, start time, end time and comments of appt to be removed
+#   Takes: title, date day, month and year, start time, end time and comments of appt to be removed
 #   Returns: nothing
 #   Summary: This function takes the information of the appointment to be
 #		deleted, and pops it from the calendar item list.
 ##########################################################################
-	def removeApptFromList(self, title, date, startTime, endTime, comments):
+	def removeApptFromList(self, title, day, month, year, startTime, endTime, comments):
 		
 
 ##########################################################################
