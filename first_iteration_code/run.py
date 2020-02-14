@@ -14,7 +14,7 @@ import time
 import json
 
 from menu import AppMenuBar
-from calendar import AppCalendar
+# from calendar import AppCalendar # not yet implemented
 from notebook import AppTabs
 
 class ToDoApp(tk.Tk):
