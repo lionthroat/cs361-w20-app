@@ -29,7 +29,7 @@ class CalendarItems:
 #		to be added, and appends it to the list of calendar items.
 ##########################################################################
 	def addApptToList(self, title, day, month, year, startTime, endTime, comments):
-	
+                self.__listOfCalItems.append(Appointment(title, day, month, year, startTime, endTime, comments))
 
 ##########################################################################
 #   Function: removeApptFromList
@@ -39,7 +39,16 @@ class CalendarItems:
 #		deleted, and pops it from the calendar item list.
 ##########################################################################
 	def removeApptFromList(self, title, day, month, year, startTime, endTime, comments):
-		
+		for i in range(len(self.__listOfCalItems)):
+			if self.__listOfCalItems[i].getTitle() == title and \
+                           self.__listOfCalItems[i].getDay() == day and \
+                           self.__listOfCalItems[i].getMonth() == month and \
+                           self.__listOfCalItems[i].getYear() == year and \
+                           self.__listOfCalItems[i].getStartTime() == startTime and \
+                           self.__listOfCalItems[i].getEndTime() == endTime and \
+                           self.__listOfCalItems[i].getComments() == comments:
+				self.__listOfCalItems.pop(i)
+				break
 
 ##########################################################################
 #   Function: loadJSON
@@ -50,7 +59,13 @@ class CalendarItems:
 #       with the next entry's data and placing that instance in the list.
 ##########################################################################
 	def loadJSON(self, filename):
-		
+		with open(filename) as jsonHandle:
+			jsonData = json.load(jsonHandle)
+			for item in jsonData:
+				self.addApptToList(item['title'], item['day'],\
+                                item['month'], item['year'], item['startTime'},\
+                                item['endTime'], item['comments'])
+		jsonHandle.close()
 
 ##########################################################################
 #   Function: saveToJSON
@@ -60,7 +75,22 @@ class CalendarItems:
 #       and places into a JSON file.
 ##########################################################################
 	def saveToJSON(self, filename):
-		
+		appts = []
+		for item in self.__listOfCalItems:
+			newAppt = {}
+			newAppt['title'] = item.getTitle()
+			newAppt['day'] = item.getDay()
+			newAppt['month'] = item.getMonth()
+			newAppt['year'] = item.getYear()
+			newAppt['startTime'] = item.getStartTime()
+			newAppt['endTime'] = item.getEndTime()
+			newAppt['comments'] = item.getComments()
+			appts.append(newAppt)
+
+		with open(filename, "w") as jsonHandle:
+			convertedJSON = json.dump(appts, jsonHandle)
+
+		jsonHandle.close()
 
 ##########################################################################
 #   Function: printAppts
@@ -70,7 +100,14 @@ class CalendarItems:
 #		in the calendar items list.
 ##########################################################################
 	def printAppts(self):
-	    
+	    for appt in self.__listOfCalItems:
+			print(appt.getTitle())
+			print(appt.getDay())
+			print(appt.getMonth())
+			print(appt.getYear())
+			print(appt.getStartTime())
+			print(appt.getEndTime())
+			print(appt.getComments())
 
 ##########################################################################
 #   GETTERS AND SETTERS
