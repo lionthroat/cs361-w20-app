@@ -1,3 +1,9 @@
+#########################################################################
+# File: style.py
+# Function: This holds all of the main styling for the program, including
+#   colors, padding, any stylistic choices
+# Last Modified: 16 February 2020
+########################################################################
 from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk

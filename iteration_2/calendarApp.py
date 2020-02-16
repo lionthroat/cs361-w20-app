@@ -1,3 +1,11 @@
+##############################################################################
+# File: calendarApp.py
+# Function:  This draws the calendar and maintains the calendar view based
+#       on current date, selection to move forward or back, or adding or
+#       removing appointments.
+# Date Last Modified: 16 February 2020
+################################################################################
+
 import tkinter.ttk as ttk
 from functools import partial
 from datetime import datetime

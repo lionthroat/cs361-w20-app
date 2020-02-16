@@ -1,8 +1,9 @@
 ##########################################################################
-#   Class: TaskList
-#   Summary:  This class holds the Task List.  It has a list of task class
+# File: TaskListClass.py
+# Function:  This class holds the Task List.  It has a list of task class
 #       instances and functions to add and remove tasks.  It can also save
 #       tasks to a JSON file or load from a JSON file.
+# Date Last Modified: 16 February 2020
 ##########################################################################
 
 import json

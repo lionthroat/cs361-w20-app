@@ -1,3 +1,9 @@
+#############################################################################
+# File: notebook.py
+# Function: This file creates the tabs for the calendar and todo list from
+#   creating instance of AppToDoList and AppCalendar classes
+# Last Updated: 16 February 2020
+#############################################################################
 from tkinter.ttk import *
 import tkinter.ttk as ttk
 from todoApp import AppToDoList
