@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.messagebox
 import sys
 from functools import partial
 from style import *
@@ -34,10 +35,10 @@ class AppMenuBar(tk.Menu):
         helpMenu.add_command(label="About", underline=1, command=self.aboutUs)
         
     def exportToDo(self):
-        sys.exit(0)
-
+        tkinter.messagebox.showinfo("Export Functionality", "Export Functionality Coming Soon!")
+        
     def exportAppts(self):
-        sys.exit(0)
+        tkinter.messagebox.showinfo("Export Functionality", "Export Functionality Coming Soon!")
         
     def quit(self, event=None):
         sys.exit(0)
@@ -51,4 +52,4 @@ class AppMenuBar(tk.Menu):
         themes.theme_use('mintChocolateChip')
         
     def aboutUs(self):
-        sys.exit(0)
+        tkinter.messagebox.showinfo("Time.to", "Version 2.0\nMade by Team 13 CS 361")
