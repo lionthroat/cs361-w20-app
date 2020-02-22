@@ -1,9 +1,3 @@
-###########################################################################
-# File: toDoApp.py
-# Function: Bridge between UI and to do list class functions for adding and
-#       removing to do list items
-# Last Modified: 16 February 2020
-###########################################################################
 from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk
