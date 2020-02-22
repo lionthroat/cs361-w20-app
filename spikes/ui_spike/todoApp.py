@@ -1,4 +1,9 @@
-
+##########################################################################
+# File: todoApp.py
+# Function: This file starts the whole to do list app with display and add
+#       and remove functionality within the GUI
+# Date Last Modified: 21 February 2020
+##########################################################################
 from tkinter.ttk import *
 import tkinter as tk
 import tkinter.ttk as ttk
