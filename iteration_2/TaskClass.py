@@ -1,6 +1,6 @@
 ##########################################################################
-# File: Task
-# Function:  This class holds the data for each task, including title of
+#   Class: Task
+#   Summary:  This class holds the data for each task, including title of
 #       the task and priority status for the task.  It also holds
 #       functions to get or set all data.
 # Date Last Modified: 16 February 2020
