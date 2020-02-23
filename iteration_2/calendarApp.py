@@ -3,7 +3,7 @@
 # Function:  This draws the calendar and maintains the calendar view based
 #       on current date, selection to move forward or back, or adding or
 #       removing appointments.
-# Date Last Modified: 16 February 2020
+# Date Last Modified: 22 February 2020
 ################################################################################
 
 import tkinter.ttk as ttk
@@ -15,6 +15,8 @@ import calendar as cal
 
 from tkinter import simpledialog
 from tkinter import messagebox
+
+from CalendarItems import *
 
 class AppCalendar(ttk.Label):
 	def __init__(self, parent):
@@ -29,17 +31,18 @@ class AppCalendar(ttk.Label):
 				   'year'	: current['year']}
 
 		# appointment list
-		#self.filepath = 'apptFile.json'
-		#myCal = ApptList()
-		#myCal.loadJSON(self.filepath)
-		myCal = [
-			{'appt': 'Concert','year': 2020,'month': 2,'date': 16,'hour': 8,'minute': 30,'ampm': 'PM'},
-			{'appt': 'Volunteer','year': 2020,'month': 2,'date': 17,'hour': 12,'minute': '00','ampm': 'PM'},
-			{'appt': 'President\'s Day','year': 2020,'month': 2,'date': 18,'hour': '','minute': '','ampm': ''},
-			{'appt': 'Midterm','year': 2020,'month': 2,'date': 20,'hour': 7,'minute': 45,'ampm': 'AM'},
-			{'appt': 'Hiking','year': 2020,'month': 2,'date': 24,'hour': 2,'minute': 15,'ampm': 'PM'},
-			{'appt': 'Leap Day','year': 2020,'month': 2,'date': 29,'hour': '','minute': '','ampm': ''}
-		]
+		self.filepath = 'apptFile.json'
+		myCal = CalendarItems()
+		myCal.loadJSON(self.filepath)
+		# myCal = [
+		# 	{'title': 'Concert','year': 2020,'month': 2,'date': 16,'hour': 8,'minute': 30,'ampm': 'PM'},
+		# 	{'title': 'Volunteer','year': 2020,'month': 2,'date': 17,'hour': 12,'minute': '00','ampm': 'PM'},
+		# 	{'title': 'President\'s Day','year': 2020,'month': 2,'date': 18,'hour': '','minute': '','ampm': ''},
+		# 	{'title': 'Midterm','year': 2020,'month': 2,'date': 20,'hour': 7,'minute': 45,'ampm': 'AM'},
+		# 	{'title': 'Hiking','year': 2020,'month': 2,'date': 24,'hour': 2,'minute': 15,'ampm': 'PM'},
+		# 	{'title': 'Leap Day','year': 2020,'month': 2,'date': 29,'hour': '','minute': '','ampm': ''}
+		# ]
+		# myCal.printAppts()
 
 		# Calendar Navigation Buttons
 		calNav = ttk.LabelFrame(self, labelanchor='n', style='calNav.TLabelframe')
@@ -51,13 +54,13 @@ class AppCalendar(ttk.Label):
 
 		self.drawMonth(display, myCal, current)
 
-	def newApptfromModal(self, modalWin, inputAppt, apptHour, apptMinute, apptAMPM, display, date, myCal, current):
+	def newApptfromModal(self, modalWin, inputAppt, apptHour, apptMinute, apptAMPM, display, day, myCal, current):
 
 		# only save appointment if user gave the event a name/title
 		if inputAppt.get() != '':
 			# add task
-			myCal.append({'appt': inputAppt.get(), 'year': display['year'], 'month': display['month'], 'date': date, 'hour': apptHour.get(), 'minute': apptMinute.get(), 'ampm': apptAMPM.get()})
-			print(myCal)
+			myCal.addApptToList(inputAppt.get(), display['year'], display['month'], day, apptHour.get(), apptMinute.get(), apptAMPM.get())
+			# myCal.printAppts()
 
 			inputAppt.delete(0, 'end')
 
@@ -65,20 +68,20 @@ class AppCalendar(ttk.Label):
 			self.drawMonth(display, myCal, current)
 
 		# save changes to file and reset display
-		#myCal.saveToJSON(self.filepath)
+		myCal.saveToJSON(self.filepath)
 
 		# Close the modal
-		modalWin.wm_attributes("-disabled", False)
+		# modalWin.wm_attributes("-disabled", False)
 		modalWin.destroy()
 
-	def apptModal(self, display, date, myCal, current):
+	def apptModal(self, display, day, myCal, current):
 		modalWin = tk.Toplevel()
 		w = '430'
 		h = '200'
 		modalWin.geometry('{}x{}'.format(w, h))
 		modalWin.title(' Add Appointment ') # main window title
 		modalWin.config(background='#F5F5F5')
-		modalWin.attributes("-toolwindow",1)
+		# modalWin.attributes("-toolwindow",1)
 		modalWin.resizable(0,0)
 		modalWin.grid()
 		modalWin.focus_force()
@@ -112,7 +115,7 @@ class AppCalendar(ttk.Label):
 		apptAMPM.grid(row = 1, column=2, sticky='e')
 		apptAMPM.current(2)
 
-		saveBtn = ttk.Button(modalWin, text=' Save ', command=partial(self.newApptfromModal, modalWin, inputAppt, apptHour, apptMinute, apptAMPM, display, date, myCal, current), style='saveBtn.TButton')
+		saveBtn = ttk.Button(modalWin, text=' Save ', command=partial(self.newApptfromModal, modalWin, inputAppt, apptHour, apptMinute, apptAMPM, display, day, myCal, current), style='saveBtn.TButton')
 		saveBtn.grid(row = 1, columnspan=6, sticky='e')
 
 	def center(self, win):
@@ -126,12 +129,14 @@ class AppCalendar(ttk.Label):
 	    y = (win.winfo_screenheight() // 2) - (height // 2)
 	    win.geometry('{}x{}+{}+{}'.format(width, height, x, y))
 
-	def addAppt(self, display, date, myCal):
+	def addAppt(self, display, day, myCal):
 		# ask for the appointment name with a pop-up
 		inputAppt = simpledialog.askstring('Add Appointment', 'Enter the name of the appointment.')
 		if inputAppt:
 			# the data structure should be changed from a dictionary to a class
-			myCal.append({'appt': inputAppt, 'year': display['year'], 'month': display['month'], 'date': date})
+			myCal.addApptToList(inputAppt, display['year'], display['month'], dislay['day'])
+			# (self, title, year, month, day, hour, minute, ampm)
+			# myCal.append({'title': inputAppt, 'year': display['year'], 'month': display['month'], 'day': display['month']})
 		print(myCal)
 
 		self.drawMonth(display, myCal, current)
@@ -139,9 +144,17 @@ class AppCalendar(ttk.Label):
 		# display appointments for each day
 	def displayAppt(self, display, today, myCal):
 		toShow = ''
-		for item in myCal:
-			if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == today:
-				toShow = toShow + (item['appt']) + '\n'
+		for i in range(myCal.getListSize()):
+			currentAppt = myCal.getApptAt(i)
+			apptTitle = currentAppt.getTitle()
+			apptYear = currentAppt.getYear()
+			apptMonth = currentAppt.getMonth()
+			apptDay = currentAppt.getDay()
+			apptHour = currentAppt.getHour()
+			apptMinute = currentAppt.getMinute()
+			apptAmpm = currentAppt.getAmpm()
+			if apptYear == display['year'] and apptMonth == display['month'] and apptDay == today:
+				toShow = toShow + (apptTitle) + '\n'
 
 		messagebox.showinfo(f'{display["month"]}/{today}/{display["year"]}', toShow)
 
@@ -236,12 +249,22 @@ class AppCalendar(ttk.Label):
 						dayBlock[daysShown].grid_propagate(False)
 
 						# button to show appointments
-						for item in myCal:
-							if item['year'] == display['year'] and item['month'] == display['month'] and item['date'] == daysShown + 1:
-								if item['hour'] != '': # see if user input a time for the event or if it's an all-day event
-									itemDisplay = item['hour'], ':' ,item['minute'], item['appt']
+						for i in range(myCal.getListSize()):
+						# for item in myCal:
+							currentAppt = myCal.getApptAt(i)
+							apptTitle = currentAppt.getTitle()
+							apptYear = currentAppt.getYear()
+							apptMonth = currentAppt.getMonth()
+							apptDay = currentAppt.getDay()
+							apptHour = currentAppt.getHour()
+							apptMinute = currentAppt.getMinute()
+							apptAmpm = currentAppt.getAmpm()
+
+							if apptYear == display['year'] and apptMonth == display['month'] and apptDay == daysShown + 1:
+								if apptHour != '': # see if user input a time for the event or if it's an all-day event
+									itemDisplay = apptHour, ':' ,apptMinute, apptTitle
 								else:
-									itemDisplay = item['appt']
+									itemDisplay = apptTitle
 								showButton = ttk.Button(dayBlock[daysShown], text=(itemDisplay), command=partial(self.displayAppt, display, daysShown + 1, myCal))
 								showButton.grid(row = 1)
 
