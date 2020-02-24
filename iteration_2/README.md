@@ -23,7 +23,7 @@
 * Open, View, and Close Calendar Monthly View
 * Move Forward and Backward in Calendar Monthly View
 * While viewing any month, jump to current month in Calendar tab
-* Click ""+"" on any date to add an appointment to that date
+* Click + on any date to add an appointment to that date
 * Adding an appointment brings up a modal to enter title and time
 * Saved appointments are displayed along with their time on the appropriate date
 * Saved appointments are also stored in apptFile.json
@@ -38,16 +38,16 @@
 
 ## Time.to Screenshots:
 Calendar View:  
-![Calendar](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot1.png)  
+![Calendar](https://github.com/wrongenvelope/cs361-w20-app/blob/master/iteration_2/screenshots/it2_screenshot1.png)  
 
 To-Do List View:  
-![To-Do-List](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot2.png)  
+![To-Do-List](https://github.com/wrongenvelope/cs361-w20-app/blob/master/iteration_2/screenshots/it2_screenshot2.png)  
 
 Menu bar, File dropdown:  
-![File-Dropdown](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot3.png)  
+![File-Dropdown](https://github.com/wrongenvelope/cs361-w20-app/blob/master/iteration_2/screenshots/it2_screenshot3.png)  
 
 Export Functionality coming soon:  
-![Export-Functionality](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot4.png)   
-  
+![Export-Functionality](https://github.com/wrongenvelope/cs361-w20-app/blob/master/iteration_2/screenshots/it2_screenshot4.png)   
+
 Switching back and forth between themes:  
-![Dracula-Theme](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot6.png)  
+![Dracula-Theme](https://github.com/wrongenvelope/cs361-w20-app/blob/master/iteration_2/screenshots/it2_screenshot6.png)  
