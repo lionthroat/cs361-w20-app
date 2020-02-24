@@ -1,11 +1,12 @@
-# CS 361, Winter 2020, Oregon State University
-## Agile Project: Iteration 2 Code
-### Team 13
-### (Iteration completed 2/23/2020, README last updated 2/24/2020)
+# "Time.to" - A Productivity Application with a Calendar and To-Do List
+## Team 13's Agile Project: Iteration 2 Code
+### CS 361, Winter 2020, Oregon State University
+(Iteration completed 2/23/2020, README last updated 2/24/2020)
 
 ## To Run The App:
-Ensure your workstation or virtual environment has Python 3 installed.
-Markup :  `python run.py` from your command line
+* Ensure your workstation or virtual environment has Python 3 installed.
+* Clone the repo and navigate to the iteration_2 directory
+* Run `python run.py` on your command line
 
 ## Current Functionalities:
 ### Application:
@@ -35,5 +36,16 @@ Markup :  `python run.py` from your command line
 * Saved tasks are also stored in taskFile.json
 * Opening the program loads all tasks saved taskFile.json
 
-## App Screenshot:
+## Time.to Screenshots:
+Calendar View:
 ![Calendar](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot1.png)
+To-Do List View:
+![To-Do-List](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot2.png)
+Menu bar, File dropdown:
+![File-Dropdown](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot3.png)
+Export Functionality coming soon:
+![Export-Functionality](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot4.png)
+Export Functionality coming soon:
+![About-Option](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot5.png)
+Switching back and forth between themes:
+![Dracula-Theme](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot6.png)
