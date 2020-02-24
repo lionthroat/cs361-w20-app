@@ -37,15 +37,15 @@
 * Opening the program loads all tasks saved taskFile.json
 
 ## Time.to Screenshots:
-Calendar View:
-![Calendar](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot1.png)
-To-Do List View:
-![To-Do-List](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot2.png)
-Menu bar, File dropdown:
-![File-Dropdown](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot3.png)
-Export Functionality coming soon:
-![Export-Functionality](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot4.png)
-Export Functionality coming soon:
-![About-Option](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot5.png)
-Switching back and forth between themes:
-![Dracula-Theme](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot6.png)
+Calendar View:  
+![Calendar](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot1.png)  
+To-Do List View:  
+![To-Do-List](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot2.png)  
+Menu bar, File dropdown:  
+![File-Dropdown](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot3.png)  
+Export Functionality coming soon:  
+![Export-Functionality](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot4.png)  
+Export Functionality coming soon:  
+![About-Option](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot5.png)  
+Switching back and forth between themes:  
+![Dracula-Theme](https://github.com/wrongenvelope/cs361-w20-app/blob/wrongenvelope/iteration2-readme/iteration_2/screenshots/it2_screenshot6.png)  
